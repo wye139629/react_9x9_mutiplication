@@ -16,7 +16,7 @@ export default class App extends Component {
     return(
       multiplier.map((num)=>{
         return (
-        <div>
+        <div key={num}>
           <h2>{num}</h2>
           <ul>
             <ItemList nums = {{num, multiplicand}}/>
@@ -32,7 +32,7 @@ class ItemList extends Component{
     const {num, multiplicand} = this.props.nums
     return(
       multiplicand.map((value)=>{
-        return (<li>{ num + "*" + value + "=" + num * value}</li>)
+        return (<li key={value}>{ num + "*" + value + "=" + num * value}</li>)
       })
     )
   }
