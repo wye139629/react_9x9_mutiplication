@@ -32,7 +32,7 @@ class ItemList extends Component{
     const {num, multiplicand} = this.props.nums
     return(
       multiplicand.map((value)=>{
-        return (<li>{ num + "*" + value + "=" + num*value}</li>)
+        return (<li>{ num + "*" + value + "=" + num * value}</li>)
       })
     )
   }
