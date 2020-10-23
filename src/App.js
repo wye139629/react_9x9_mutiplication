@@ -3,56 +3,37 @@ import React, { Component } from 'react'
 export default class App extends Component {
   constructor(props){
     super(props)
+    const arg = Array(9).fill(1).map((num, index)=>{
+      return num = index + 1
+    })
     this.state = {
-      multiplier : [1,2,3,4,5,6,7,8,9],
-      multiplicand : [1,2,3,4,5,6,7,8,9]
+      multiplier : [...arg],
+      multiplicand : [...arg]
     }
   }
-  render() {
+  render(){
     const {multiplier, multiplicand} = this.state
-    let numberItems = []
-    let item
-    for(let i = 0; i < multiplier.length; i++){
-        item = <NumberItem multiplier = {multiplier[i]} multiplicand = {multiplicand}/>
-        numberItems.push(item)
-    }
-    return (
-      <div>
-        {numberItems}
-      </div>
-    )
-  }
-}
-class NumberItem extends Component{
-  render(){
-    const multiplier = this.props.multiplier
-    const multiplicand = this.props.multiplicand
-    let multiplyItmes = []
-    let multiplyItme
-    for(let i = 0; i < multiplicand.length; i++){
-      multiplyItme = <Multiply multiplier = {multiplier} multiplicand = {multiplicand[i]}/>
-      multiplyItmes.push(multiplyItme)
-    }
     return(
-     <div>
-       <h2>
-        {multiplier}
-       </h2>
-       <ul>
-          {multiplyItmes}
-       </ul>
-     </div>
+      multiplier.map((num)=>{
+        return (
+        <div>
+          <h2>{num}</h2>
+          <ul>
+            <ItemList nums = {{num, multiplicand}}/>
+          </ul>
+        </div>)
+      })
     )
   }
 }
 
-class Multiply extends Component{
-
+class ItemList extends Component{
   render(){
-    const multiplier = this.props.multiplier
-    const multiplicand = this.props.multiplicand
+    const {num, multiplicand} = this.props.nums
     return(
-      <li>{multiplier + "*" +multiplicand + "=" + multiplier * multiplicand}</li>
+      multiplicand.map((value)=>{
+        return (<li>{ num + "*" + value + "=" + num*value}</li>)
+      })
     )
   }
 }
