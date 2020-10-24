@@ -13,27 +13,29 @@ export default class App extends Component {
   }
   render(){
     const {multiplier, multiplicand} = this.state
+    console.log(multiplier)
     return(
-      multiplier.map((num)=>{
-        return (
-        <div key={num}>
-          <h2>{num}</h2>
-          <ul>
-            <ItemList nums = {{num, multiplicand}}/>
-          </ul>
-        </div>)
-      })
+      <div>
+        {multiplicand.map((value)=>{
+          return (<List key={value} nums = {{num: value, multiplier: multiplier}}/>)
+        })
+        }
+      </div>
     )
   }
 }
-
-class ItemList extends Component{
+class List extends Component{
   render(){
-    const {num, multiplicand} = this.props.nums
+    const {num, multiplier} = this.props.nums
     return(
-      multiplicand.map((value)=>{
-        return (<li key={value}>{ num + "*" + value + "=" + num * value}</li>)
-      })
+      <div>
+        <h2>{num}</h2>
+        <ul>
+          {multiplier.map((value)=>{
+            return (<li key={value}>{`${num} * ${value} = ${num*value}`}</li>)
+          })}
+        </ul>
+      </div>
     )
   }
 }
