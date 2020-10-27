@@ -1,41 +1,34 @@
-import React, { Component } from 'react'
+import React, { Fragment, useState } from 'react';
 
-export default class App extends Component {
-  constructor(props){
-    super(props)
-    const arg = Array(9).fill(1).map((num, index)=>{
-      return num = index + 1
-    })
-    this.state = {
-      multiplier : [...arg],
-      multiplicand : [...arg]
-    }
-  }
-  render(){
-    const {multiplier, multiplicand} = this.state
-    console.log(multiplier)
-    return(
-      <div>
-        {multiplicand.map((value)=>{
-          return (<List key={value} nums = {{num: value, multiplier: multiplier}}/>)
+export default function App(){
+  const args = Array(9).fill(1).map((value, index)=>{
+    return value = index + 1
+  })
+  const [multiplyArray, setMultiplier] = useState([...args])
+  console.log(multiplyArray)
+  return (
+    <Fragment>
+      {
+        multiplyArray.map((num)=>{
+          return(
+            <ListItem multiplyProps={{multiplican: multiplyArray, multiplier: num}}/>
+          )
         })
-        }
-      </div>
-    )
-  }
+      }
+    </Fragment>
+  )
 }
-class List extends Component{
-  render(){
-    const {num, multiplier} = this.props.nums
-    return(
-      <div>
-        <h2>{num}</h2>
-        <ul>
-          {multiplier.map((value)=>{
-            return (<li key={value}>{`${num} * ${value} = ${num*value}`}</li>)
-          })}
-        </ul>
-      </div>
-    )
-  }
+
+function ListItem(props){
+  const {multiplican, multiplier} = props.multiplyProps
+  return (
+    <div>
+      <h2>{multiplier}</h2>
+      <ul>
+        {multiplican.map((value)=>{
+          return <li>{`${multiplier} * ${value} = ${multiplier*value}`}</li>
+        })}
+      </ul>
+    </div>
+  )
 }
